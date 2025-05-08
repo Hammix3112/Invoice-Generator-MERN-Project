@@ -23,8 +23,6 @@ app.get("/", (req, res) => {
   res.send("Hello Hammad Ali!");
 });
 
-// History Routes
-app.use("/api/history", historyRoutes);
 
 // Auth Routes
 app.use("/api/auth", authRoutes);
