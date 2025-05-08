@@ -91,7 +91,7 @@ router.post('/createuser', [
 });
 
 // Authenticate a user using POST "/api/auth/login". No login required
-router.post('/login', [
+router.post('/signin', [
     body('email', 'Invalid email format').isEmail(),
     body('password', 'Password cannot be blank').exists()
 ], async (req, res) => {
@@ -163,7 +163,7 @@ router.post('/getuser', fetchuser, async (req, res) => {
 
 // Forgot Password Route
 // Forgot Password Route
-router.post('/forgotpassword', async (req, res) => {
+router.post('/passwordforgot', async (req, res) => {
     const { email } = req.body;
 
     try {
@@ -192,7 +192,7 @@ router.post('/forgotpassword', async (req, res) => {
 });
 
 // Reset Password Route
-router.route('/resetpassword/:token')
+router.route('/passwordreset/:token')
   .get(async (req, res) => {
     const { token } = req.params;
     try {
