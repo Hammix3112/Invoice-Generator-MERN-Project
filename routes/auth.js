@@ -204,7 +204,7 @@ router.post("/passwordforgot", async (req, res) => {
 
 // Reset Password Route
 router
-  .route("/passwordreset/:token")
+  .route("/resetpassword/:token")
   .get(async (req, res) => {
     const { token } = req.params;
     try {
