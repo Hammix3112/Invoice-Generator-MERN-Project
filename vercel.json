@@ -1,23 +1,14 @@
 {
   "version": 2,
-  "public": true,
   "builds": [
-    {
-      "src": "index.html",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "assets/**/*",
-      "use": "@vercel/static"
-    }
+    { "src": "index.js", "use": "@vercel/node" },
+    { "src": "dist/index.html", "use": "@vercel/static" },
+    { "src": "dist/assets/**", "use": "@vercel/static" }
   ],
   "routes": [
-    {
-      "handle": "filesystem"
-    },
-    {
-      "src": "/.*",
-      "dest": "/index.html"
-    }
+    { "src": "/api/(.*)", "dest": "index.js" },                               
+    { "src": "/assets/(.*)", "dest": "/dist/assets/$1" },                     
+    { "src": "/resetpassword/.*", "dest": "/dist/index.html" },              
+    { "src": "/(.*)", "dest": "/dist/index.html" }                           
   ]
 }
