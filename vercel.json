@@ -6,9 +6,29 @@
     { "src": "dist/assets/**", "use": "@vercel/static" }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "index.js" },
-    { "src": "/assets/(.*)", "dest": "/dist/assets/$1" },
-    { "src": "/resetpassword/.*", "dest": "/dist/index.html" },
-    { "src": "/(.*)", "dest": "/dist/index.html" }
+    {
+      "src": "/api/(.*)",
+      "dest": "index.js"
+    },
+   
+    {
+      "src": "/assets/(.*)", 
+      "dest": "/assets/$1", 
+      "continue": true       
+    },
+    {
+      "src": "/favicon.ico",
+      "dest": "/favicon.ico",
+      "continue": true
+    },
+    { "src": "/resetpassword/(.*)", "dest": "/index.html" },
+    {
+      "src": "/(.*)",
+      "missing": [ 
+        { "type": "file" },
+        { "type": "directory" }
+      ],
+      "dest": "/index.html"
+    }
   ]
 }
