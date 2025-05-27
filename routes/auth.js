@@ -185,7 +185,7 @@ router.post("/passwordforgot", async (req, res) => {
     });
 
     // ✅ Point to your React frontend instead of backend
-    const resetLink = `https://invoice-generator-mern-project.vercel.app/resetpassword/${resetToken}`;
+    const resetLink = `https://invoice-generator-mern-project.vercel.app/passwordreset/${resetToken}`;
 
     try {
       await sendResetEmail(user.email, resetLink);
@@ -204,7 +204,7 @@ router.post("/passwordforgot", async (req, res) => {
 
 // Reset Password Route
 router
-  .route("/resetpassword/:token")
+  .route("/passwordreset/:token")
   .get(async (req, res) => {
     const { token } = req.params;
     try {
