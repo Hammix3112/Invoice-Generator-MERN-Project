@@ -17,7 +17,7 @@ app.use(express.json());
 
 app.use(express.static(path.resolve(__dirname, "dist")));
 
-// app.get("*" , (req , res) => res.sendFile(path.resolve("dist" , "index.html")))
+app.get("*" , (req , res) => res.sendFile(path.resolve("dist" , "index.html")))
 
 app.get("/", (req, res) => {
   res.send("Hello Hammad Ali!");
