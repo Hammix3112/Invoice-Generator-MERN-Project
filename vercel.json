@@ -5,10 +5,18 @@
       "use": "@vercel/node"
     },
     {
-      "src": "dist/**",
+      "src": "build/**",
       "use": "@vercel/static"
     }
   ],
-
-  "rewrites": [{ "source": "/(.*)", "destination": "index.js" }]
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "index.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "build/$1"
+    }
+  ]
 }
