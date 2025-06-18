@@ -15,9 +15,7 @@ connectToMongo(); // Connect to MongoDB
 app.use(cors()); // Allow cross-origin requests
 app.use(express.json());
 
-app.use(express.static(path.resolve(__dirname, "dist")));
 
-app.get("*" , (req , res) => res.sendFile(path.resolve("dist" , "index.html")))
 
 app.get("/", (req, res) => {
   res.send("Hello Hammad Ali!");
@@ -31,6 +29,10 @@ app.use("/api/history", historyRoutes);
 
 // Invoice Routes (MongoDB connected version)
 app.use("/api/invoices", invoicesRoutes); // <-- this handles POST, GET, etc.
+
+app.use(express.static(path.resolve(__dirname, "dist")));
+
+app.get("*" , (req , res) => res.sendFile(path.resolve("dist" , "index.html")))
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
