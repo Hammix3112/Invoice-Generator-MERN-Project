@@ -4,35 +4,29 @@ const cors = require("cors");
 const path = require("path");
 
 const historyRoutes = require("./routes/history");
-const invoicesRoutes = require("./routes/invoices"); // <-- Correct route
+const invoicesRoutes = require("./routes/invoices");
 const authRoutes = require("./routes/auth");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-connectToMongo(); // Connect to MongoDB
+connectToMongo();
 
-app.use(cors()); // Allow cross-origin requests
+app.use(cors());
 app.use(express.json());
 
-
-
-app.get("/", (req, res) => {
-  res.send("Hello Hammad Ali!");
-});
-
-// Auth Routes
+// ✅ API Routes — must be FIRST
 app.use("/api/auth", authRoutes);
-
-// Notes Routes (maybe you want a 'notes' route instead of history again? double-check this)
 app.use("/api/history", historyRoutes);
+app.use("/api/invoices", invoicesRoutes);
 
-// Invoice Routes (MongoDB connected version)
-app.use("/api/invoices", invoicesRoutes); // <-- this handles POST, GET, etc.
-
+// ✅ Serve frontend static files
 app.use(express.static(path.resolve(__dirname, "dist")));
 
-app.get("*" , (req , res) => res.sendFile(path.resolve("dist" , "index.html")))
+// ✅ Catch-all route for React (after API + static)
+app.get("*", (req, res) =>
+  res.sendFile(path.resolve("dist", "index.html"))
+);
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
