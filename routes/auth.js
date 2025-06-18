@@ -85,7 +85,7 @@ router.post(
       const secPass = await bcrypt.hash(req.body.password, salt);
 
       user = await User.create({
-        name: req.body.name,
+        username: req.body.name,
         email: req.body.email,
         password: secPass,
       });
