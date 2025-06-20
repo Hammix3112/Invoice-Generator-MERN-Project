@@ -47,14 +47,21 @@ router.get("/", fetchuser, async (req, res) => {
 });
 
 // GET: Fetch a single invoice by its ID
+// GET: Fetch a single invoice by its ID (safe version)
 router.get("/:id", fetchuser, async (req, res) => {
   try {
-    const invoice = await Invoice.findById(req.params.id); // Fetch a single invoice by its ID
+    const invoice = await Invoice.findOne({
+      _id: req.params.id,
+      user: req.user.id, // ✅ ensure the invoice belongs to the logged-in user
+    });
+
     if (!invoice) {
-      return res.status(404).json({ message: "Invoice not found" });
+      return res.status(404).json({ message: "Invoice not found or unauthorized" });
     }
-    res.status(200).json(invoice); // Respond with the found invoice
+
+    res.status(200).json(invoice);
   } catch (err) {
+    console.error("Error fetching invoice:", err);
     res.status(500).json({ message: "Error fetching invoice", error: err });
   }
 });
