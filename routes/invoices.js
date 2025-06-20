@@ -53,14 +53,13 @@ router.post("/", fetchuser, async (req, res) => {
       user: req.user.id
     });
 
-
-
     const savedInvoice = await newInvoice.save();
-    res.status(201).json(savedInvoice); // Respond with the saved invoice
+    res.status(201).json(savedInvoice);
   } catch (err) {
     res.status(500).json({ message: "Error saving invoice", error: err });
   }
 });
+
 
 // GET: Fetch invoices for the logged-in user
 router.get("/", fetchuser, async (req, res) => {
