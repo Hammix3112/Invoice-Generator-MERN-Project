@@ -12,9 +12,21 @@ router.post("/", fetchuser, async (req, res) => {
       total,
       currency,
       dueDate,
+      date,
       items,
       poNumber,
       paymentTerms,
+      from,
+      shipTo,
+      notes,
+      terms,
+      amountPaid,
+      tax,
+      discount,
+      shipping,
+      isTaxPercentage,
+      isDiscountPercentage,
+      customLabels
     } = req.body;
 
     const newInvoice = new Invoice({
@@ -22,12 +34,26 @@ router.post("/", fetchuser, async (req, res) => {
       reference,
       total,
       currency,
+      dueDate,
+      date,
       items,
       poNumber,
       paymentTerms,
-      dueDate,
-      user: req.user.id, // Make sure the user ID is added here
+      from,
+      shipTo,
+      notes,
+      terms,
+      amountPaid,
+      tax,
+      discount,
+      shipping,
+      isTaxPercentage,
+      isDiscountPercentage,
+      customLabels,
+      user: req.user.id
     });
+
+
 
     const savedInvoice = await newInvoice.save();
     res.status(201).json(savedInvoice); // Respond with the saved invoice
