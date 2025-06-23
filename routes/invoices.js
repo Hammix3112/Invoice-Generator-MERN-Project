@@ -26,7 +26,7 @@ router.post("/", fetchuser, async (req, res) => {
       shipping,
       isTaxPercentage,
       isDiscountPercentage,
-      customLabels
+      customLabels,
     } = req.body;
 
     const newInvoice = new Invoice({
@@ -50,7 +50,7 @@ router.post("/", fetchuser, async (req, res) => {
       isTaxPercentage,
       isDiscountPercentage,
       customLabels,
-      user: req.user.id
+      user: req.user.id,
     });
 
     const savedInvoice = await newInvoice.save();
@@ -59,7 +59,6 @@ router.post("/", fetchuser, async (req, res) => {
     res.status(500).json({ message: "Error saving invoice", error: err });
   }
 });
-
 
 // GET: Fetch invoices for the logged-in user
 router.get("/", fetchuser, async (req, res) => {
@@ -102,12 +101,10 @@ router.delete("/:id", fetchuser, async (req, res) => {
 router.delete("/", fetchuser, async (req, res) => {
   try {
     const result = await Invoice.deleteMany({ user: req.user.id });
-    res
-      .status(200)
-      .json({
-        message: "All invoices deleted",
-        deletedCount: result.deletedCount,
-      });
+    res.status(200).json({
+      message: "All invoices deleted",
+      deletedCount: result.deletedCount,
+    });
   } catch (err) {
     console.error("Error deleting all invoices:", err);
     res

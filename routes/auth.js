@@ -9,9 +9,7 @@ const router = express.Router();
 const fetchuser = require("../middleware/fetchuser");
 const nodemailer = require("nodemailer");
 const { OAuth2Client } = require("google-auth-library");
-const client = new OAuth2Client(
-  process.env.GOOGLE_CLIENT_ID
-);
+const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
 const JWT_SECRET = process.env.JWT_SECRET;
 
@@ -26,8 +24,7 @@ router.post("/googlelogin", async (req, res) => {
 
     const ticket = await client.verifyIdToken({
       idToken: token,
-      audience:
-        process.env.GOOGLE_CLIENT_ID,
+      audience: process.env.GOOGLE_CLIENT_ID,
     });
 
     const payload = ticket.getPayload();

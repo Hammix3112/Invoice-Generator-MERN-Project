@@ -24,9 +24,7 @@ app.use("/api/invoices", invoicesRoutes);
 app.use(express.static(path.resolve(__dirname, "dist")));
 
 // ✅ Catch-all route for React (after API + static)
-app.get("*", (req, res) =>
-  res.sendFile(path.resolve("dist", "index.html"))
-);
+app.get("*", (req, res) => res.sendFile(path.resolve("dist", "index.html")));
 
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);

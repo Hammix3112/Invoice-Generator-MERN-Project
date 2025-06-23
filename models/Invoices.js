@@ -1,7 +1,7 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const InvoiceSchema = new mongoose.Schema({
-  user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+  user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
   customer: { type: String, required: true },
   reference: { type: String, required: true },
   total: { type: Number, required: true },
@@ -28,16 +28,16 @@ const InvoiceSchema = new mongoose.Schema({
       description: String,
       quantity: Number,
       rate: Number, // 🔄 Replacing "price" to match your frontend
-    }
+    },
   ],
 
   date: {
     type: Date,
-    default: Date.now
+    default: Date.now,
   },
   dueDate: {
-    type: String
-  }
+    type: String,
+  },
 });
 
-module.exports = mongoose.model('Invoice', InvoiceSchema);
+module.exports = mongoose.model("Invoice", InvoiceSchema);
